@@ -26,7 +26,7 @@ public class Main extends Application {
 			if (r == null)
 				throw new Exception("No FXML resource found.");
 			Scene scene = new Scene(FXMLLoader.load(r));
-			stage.setTitle("Critter World");
+			stage.setTitle("Fish");
 			stage.setScene(scene);
 			stage.sizeToScene();
 			stage.show();

@@ -9,24 +9,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-
 import com.google.gson.Gson;
 
 import bundles.Bundle;
 import bundles.LoginBundle;
 import bundles.SessionIDBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Pane;
 
 public class Client {
 	private URL url;
@@ -189,10 +185,6 @@ public class Client {
 	@SuppressWarnings("unused")
 	@FXML
 	private void handleURLButtonClick() {
-		boolean needToRestart = false;
-		if (this.url != null) {
-			needToRestart = true;
-		}
 		try {
 			String strippedURL = "";
 			String urlText = serverURLTextField.getText();
@@ -207,15 +199,15 @@ public class Client {
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			}
-			String[] loginInfo = openLogin();
-			if (loginInfo[0] == null || loginInfo[1] == null) {
+			String loginInfo = openLogin();
+			if (loginInfo == null || loginInfo == null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error alert");
 				alert.setHeaderText("Could not authenticate");
 				alert.showAndWait();
 				return;
 			}
-			LoginBundle loginBundle = new LoginBundle(loginInfo[0], loginInfo[1]);
+			LoginBundle loginBundle = new LoginBundle(loginInfo);
 
 			SessionIDBundle sessionIDBundle = new SessionIDBundle();
 			BufferedReader br = getReaderFromPOST(urlWithParams, loginBundle);
@@ -272,34 +264,20 @@ public class Client {
 	 * Returns a string array with the 0th index as the level and the 1st index as
 	 * the password.
 	 */
-	private String[] openLogin() {
-		TextInputDialog levelDialog = new TextInputDialog("admin");
-		levelDialog.setTitle("Authentication:");
-		levelDialog.setHeaderText("Enter level:");
-		String[] loginInfo = new String[2];
-		Optional<String> result = levelDialog.showAndWait();
-		if (result != null) {
-			try {
-				loginInfo[0] = result.get();
-
-			} catch (Exception e) {
-				loginInfo[0] = "";
-			}
-
-		}
-		TextInputDialog passwordDialog = new TextInputDialog("gandalf");
+	private String openLogin() {
+		TextInputDialog passwordDialog = new TextInputDialog("alanna");
 		passwordDialog.setTitle("Authentication:");
 		passwordDialog.setHeaderText("Enter password:");
-		result = passwordDialog.showAndWait();
+		Optional<String> result = passwordDialog.showAndWait();
 		if (result != null) {
 			try {
-				loginInfo[1] = result.get();
+				return result.get();
 
 			} catch (Exception e) {
-				loginInfo[1] = "";
+				return "";
 			}
 		}
-		return loginInfo;
+		return "";
 	}
 
 }

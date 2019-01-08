@@ -13,12 +13,11 @@ import bundles.SessionIDBundle;
 
 public class Server {
 	int session_id;
-	HashMap<String, String> passHash;
-	HashMap<Integer, String> levelHash;
 	ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+	String pass = "alanna";
 
 	public static void main(String[] args) {
-		new Server().run(8080, "bilbo", "frodo", "gandalf");
+		new Server().run(8080, "alanna");
 	}
 
 	/**
@@ -29,18 +28,13 @@ public class Server {
 	 * @param write
 	 * @param admin
 	 */
-	public void run(int portNum, String read, String write, String admin) {
+	public void run(int portNum, String p) {
 		// Make the server run on specified port
 		port(portNum);
 
 		// Create a new GSON converter
 		Gson gson = new Gson();
 		session_id = 1;
-		passHash = new HashMap<String, String>();
-		levelHash = new HashMap<Integer, String>();
-		passHash.put("read", read);
-		passHash.put("write", write);
-		passHash.put("admin", admin);
 //		sim = new WorldSimulation(lock);
 		/**
 		 * Post request for logging in which returns the session id
@@ -50,16 +44,14 @@ public class Server {
 			try {
 				String json = request.body();
 				LoginBundle login = gson.fromJson(json, LoginBundle.class);
-				String level = login.level;
 				String password = login.password;
-				if (passHash.get(level).equals(password)) {
-					levelHash.put(session_id, login.level);
+				if (pass.equals(password)) {
 					response.status(200);
 					SessionIDBundle sessionIDBundle = new SessionIDBundle(session_id++);
 					return sessionIDBundle;
 				} else {
 					response.status(401);
-					return "Username and password do not match";
+					return "Password is incorrect";
 				}
 			} finally {
 				lock.writeLock().unlock();

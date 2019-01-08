@@ -12,12 +12,10 @@ public class ClientAndServerMain {
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			Main clientMain = new Main();
-			clientMain.main(args); 
-		} else if (args.length == 4) {
-			int portNum = 8080; 
-			String readPass;
-			String writePass;
-			String adminPass;
+			clientMain.main(args);
+		} else if (args.length == 2) {
+			int portNum = 8080;
+			String password;
 			try {
 				portNum = Integer.parseInt(args[0]);
 
@@ -25,16 +23,13 @@ public class ClientAndServerMain {
 				System.out.println("Not a valid port number. Supplying default 8080.");
 
 			}
-			readPass = args[1];
-			writePass = args[2];
-			adminPass = args[3];
+			password = args[1];
 
 			Server server = new Server();
-			server.run(portNum, readPass, writePass, adminPass);
+			server.run(portNum, password);
 
 		}
 
 	}
-
 
 }

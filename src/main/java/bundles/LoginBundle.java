@@ -5,15 +5,14 @@ package bundles;
  *
  */
 public class LoginBundle extends Bundle {
-	public String level, password;
+	public String password;
 
-	public LoginBundle(String l, String p) {
-		level = l;
+	public LoginBundle(String p) {
 		password = p;
 	}
 
 	public String toString() {
-		return "level: " + level + "password: " + password;
+		return "password: " + password;
 	}
 
 }
