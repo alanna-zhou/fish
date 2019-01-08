@@ -9,4 +9,23 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKey" prefHeight="1020.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Client" />
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKey" prefHeight="1020.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Client">
+   <children>
+      <TextField fx:id="serverURLTextField" layoutX="461.0" layoutY="36.0" promptText="Server Base URL" />
+      <Button fx:id="serverURLButton" layoutX="650.0" layoutY="36.0" mnemonicParsing="false" text="Enter" />
+      <Button fx:id="createRoomButton" layoutX="33.0" layoutY="23.0" mnemonicParsing="false" text="Create Room" />
+      <Button fx:id="joinRoomButton" layoutX="33.0" layoutY="63.0" mnemonicParsing="false" text="Join Room" />
+      <Button fx:id="teammate1Button" layoutX="221.0" layoutY="268.0" mnemonicParsing="false" text="Teammate" />
+      <Button fx:id="opponent1Button" layoutX="224.0" layoutY="435.0" mnemonicParsing="false" text="Opponent" />
+      <Button fx:id="opponent2Button" layoutX="506.0" layoutY="268.0" mnemonicParsing="false" text="Opponent" />
+      <Button fx:id="opponent3Button" layoutX="778.0" layoutY="435.0" mnemonicParsing="false" text="Opponent" />
+      <Button fx:id="teammate2Button" layoutX="777.0" layoutY="268.0" mnemonicParsing="false" text="Teammate" />
+      <Label fx:id="playerNameLabel" layoutX="506.0" layoutY="511.0" text="Player Name" />
+      <Label fx:id="playerHandLabel" layoutX="456.0" layoutY="407.0" prefHeight="78.0" prefWidth="182.0" text="Player's Hand" />
+      <Button fx:id="completedSetsButton" layoutX="515.0" layoutY="716.0" mnemonicParsing="false" text="Completed Sets" />
+      <Button fx:id="declareButton" layoutX="188.0" layoutY="716.0" mnemonicParsing="false" text="Declare" />
+      <Label layoutX="444.0" layoutY="179.0" text="Score:" />
+      <Label fx:id="scoreLabel" layoutX="508.0" layoutY="180.0" prefHeight="25.0" prefWidth="153.0" />
+   </children>
+</Pane>
